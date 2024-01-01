@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Công Cụ Lấy Avatar Facebook</title>
+	<style>
+		body {
+			text-align: center;
+		}
+
+		.logo {
+			animation: logoMove 2s ease-in-out infinite;
+		}
+
+		@keyframes logoMove {
+			0% {
+				transform: translateX(-50px);
+			}
+			50% {
+				transform: translateX(50px);
+			}
+			100% {
+				transform: translateX(-50px);
+			}
+		}
+
+		#profile-id,
+		#pic-size {
+			display: block;
+			margin: 0 auto;
+			width: 350px;
+			font-size: 16px;
+			padding: 8px;
+			border-radius: 4px;
+			border: 1px solid #ccc;
+			outline: none;
+			text-align: center;
+		}
+#profile-pic {
+    display: block;
+    max-width: 100%;
+    margin: 16px auto;
+}
+
+@media only screen and (min-width: 768px) {
+    #profile-pic {
+        max-width: 50%;
+        margin: 32px auto;
+    }
+}
+
+		#pic-size {
+			margin-top: 8px;
+		}
+
+		button {
+			display: block;
+			margin: 16px auto;
+			padding: 8px 16px;
+			border-radius: 4px;
+			border: none;
+			background-color: #4267b2;
+			color: #fff;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #29487d;
+		}
+
+		#profile-pic {
+			display: none;
+			max-width: 100%;
+			margin-top: 16px;
+		}
+
+		#download-link {
+			display: none;
+			margin-top: 16px;
+			font-size: 16px;
+			color: #4267b2;
+			cursor: pointer;
+		}
+
+		.show-download-link #download-link {
+			display: block;
+		}
+
+		.show-profile-pic #profile-pic {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<img src="https://i.imgur.com/UP4ovVD.gif" class="logo">
+	<h1>Công Cụ Lấy Avatar Facebook</h1>
+	<input type="text" id="profile-id" placeholder="Nhập Uid Facebook:">
+	<select id="pic-size">
+		<option value="200">Nhỏ (200 pixels)</option>
+		<option value="500">Trung Bình (500 pixels)</option>
+		<option value="1000" selected>Lớn (1000 pixels)</option>
+	</select>
+	<button onclick="getProfilePicture()">Get Avatar Facebook</button>
+	<img id="profile-pic" src="" alt="Profile Picture">
+	<a id="download-link" href="#" download="profile-pic.jpg">Download</a>
+
+	<script>
+		function getProfilePicture() {
+			// get the input value and selected size
+			var id = document.getElementById("profile-id").value;
+			var size = document.getElementById("pic-size").value;
+
+			// create the profile picture URL with the ID and size
+			var profilePicUrl = `https://graph.facebook.com/${id}/picture?width=${size}&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
+
+			// display the profile picture
+			var profilePic = document.getElementById("profile-pic");
+			profilePic.style.display = "block";
+			profilePic.src = profilePicUrl;
+
+			// show the download link
+			var downloadLink = document.getElementById("download-link");
+			downloadLink.style.display = "block";
+			downloadLink.href = profilePicUrl;
+			downloadLink.parentNode.classList.add("show-download-link");
+		}
+	</script>
+</body>
+</html>
